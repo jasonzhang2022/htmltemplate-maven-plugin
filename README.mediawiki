@@ -1,14 +1,16 @@
 ==Description==
 
 
-maven plugin to wrap html fragment into javascript template used by angular js client
+maven plugin to wrap html fragments into a javascript template used by angular js client
 
 ===Introduction===
 
 You often have many small html files if angular js is used. Minimization exists for js/css.
-We also need such tool for  html. This is particular useful if you  html template is used in UI 
-library. One such example is [http://angular-ui.github.io/bootstrap UI Bootstrap].
-This plugin consolidates html file into angular js template.  
+We also need such tool for  htmls. This is particular useful if your  html templates are used in UI 
+library. One such example is [http://angular-ui.github.io/bootstrap UI Bootstrap]. For exmaple, 
+bootstrap UI has many small [https://github.com/angular-ui/bootstrap/tree/master/template fragments as template].
+The final distribution is a single javascript file with all these htmls.  This plugin 
+consolidates html files into angular js template.   It is built into maven compile phase.
 
 
 ===Usage===
@@ -43,8 +45,9 @@ Add this fragement to your pom
 		</plugins>
 </build>
 </pre>
-====Parameters====
-#srcDirectory: source directory. File are searched recursively.
+====Configuration====
+Three parameters are available.
+#srcDirectory: source directory. File are searched recursively. All Files found are processed. 
 #finalFile: where to output Javascript file.
 #templateFile: optional. If omitted, internal template is used.
 
