@@ -3,7 +3,7 @@
 
 	<groupId>com.flexdms</groupId>
 	<artifactId>htmltemplate-maven-plugin</artifactId>
-	<version>0.1.0</version>
+	<version>0.1.1-SNAPSHOT</version>
 	<packaging>maven-plugin</packaging>
 	<description>merge html fragment files into a single javascript template file used by angularjs client</description>
 
