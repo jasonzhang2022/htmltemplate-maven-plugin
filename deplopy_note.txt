@@ -12,11 +12,14 @@ stage
 	mvn release:prepare
 	mvn release:perform
 	
-run mvn command like this
-
-mvn  -X  -DskipTests -Dgpg.passphrase=xxxx install
-
-do not know why "-DskipTests" or -Darguments='-DskipTests' does not work for release:prepare.
-	I have to ignore WebTest to git it released
-
--Dgpg.passphrase=xxxx to pass the gpg passphrase
+	run mvn command like this
+	
+	mvn  -X  -DskipTests -Dgpg.passphrase=xxxx install
+	
+	do not know why "-DskipTests" or -Darguments='-DskipTests' does not work for release:prepare.
+		I have to ignore WebTest to git it released
+	
+	-Dgpg.passphrase=xxxx to pass the gpg passphrase
+Release
+	https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide#SonatypeOSSMavenRepositoryUsageGuide-8a.ReleaseIt
+	
