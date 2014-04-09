@@ -1,6 +1,7 @@
 package com.flexdms.htmltemplate;
 
 import java.io.File;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
@@ -43,6 +44,30 @@ public class HtmlTemplateMojoTest extends AbstractMojoTestCase {
 		assertTrue(contentString.contains("+\"<div id=\\\"child1\\\">\""));
 		
 	
+	}
+	
+	@Test
+	public void testNewParams() throws Exception {
+		new File("target/final2.js").delete();
+		File pom = getTestFile("src/test/resources/unit/testpom2.xml");
+		assertNotNull(pom);
+		assertTrue(pom.exists());
+
+		HtmlTemplateMojo myMojo = (HtmlTemplateMojo) lookupMojo("merge", pom);
+		assertNotNull(myMojo);
+		myMojo.execute();
+		assertTrue(new File("target/final2.js").exists());
+		
+		
+		List<String> contents=FileUtils.readLines(new File("target/final2.js"));
+		String firstline=contents.get(0);
+		String lastline=null;
+		for(String lastline1: contents) {
+			System.out.println(lastline1);
+			lastline=lastline1;
+		}
+		assertEquals("instApp.run(function($templateCacge) {", firstline);
+		assertEquals("});", lastline);
 	}
 
 }

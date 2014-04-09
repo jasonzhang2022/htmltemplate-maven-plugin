@@ -50,9 +50,12 @@ Three parameters are available.
 #srcDirectory: source directory. File are searched recursively. All Files found are processed. 
 #finalFile: where to output Javascript file.
 #templateFile: optional. If omitted, internal template is used.
+#fileHeader: header string in the final file.
+#fileFooter: footer string in the final file
+#generateModule: whether to generate module statement.
 
 ==Example==
-Please run mvn test to see an example.  Test set up is under src/test/resources/unit directory. Final file is writtern to target/final.js
+Please run mvn test to see an example.  Test set up is under src/test/resources/unit directory. Final file is writtern to target/final.js or target/final2.js
 
 ==License==
 [[LICENSE| apache 2]]

@@ -72,6 +72,29 @@ public class HtmlTemplateMojo extends AbstractMojo {
 	 */
 	@Parameter(defaultValue = "src/main/webapp/js/templates.js")
 	File finalFile;
+	
+	/**
+	 * String add to the top of the final file.
+	 */
+	@Parameter
+	String fileHeader;
+	
+	/**
+	 * String add to the bottom of the final file before module generation
+	 * 
+	 */
+	@Parameter
+	String fileFooter;
+	
+	/**
+	 * Whether to generate module statement at the very bottom of the file.
+	 */
+	@Parameter
+	boolean generateModule=true;
+	
+	
+	
+	
 
 	public void execute() throws MojoExecutionException {
 
@@ -105,18 +128,23 @@ public class HtmlTemplateMojo extends AbstractMojo {
 			List<String> modules = new ArrayList<String>(20);
 
 			String templateNamePrefix = template.substring(template.indexOf('"') + 1, template.indexOf("@@@@name@@@@"));
-			
+			if (fileHeader!=null) {
+				writer.write(fileHeader);
+			}
 			for (String childFile: files) {
 				transformFile(childFile, srcDirectory, writer, template, modules);
 			}
-
-			//handleDirectory(srcDirectory, FilenameUtils.normalizeNoEndSeparator(srcDirectory.getAbsolutePath(), true), writer, template, modules);
-
-			writer.write("angular.module(\"ui." + srcDirectory.getName() + ".tpls\", [");
-			for (String module : modules) {
-				writer.write("\"" + templateNamePrefix + module + "\",\n");
+			if (fileFooter!=null) {
+				writer.write(fileFooter);
 			}
-			writer.write("]);\n");
+			//handleDirectory(srcDirectory, FilenameUtils.normalizeNoEndSeparator(srcDirectory.getAbsolutePath(), true), writer, template, modules);
+			if (generateModule) {
+				writer.write("angular.module(\"ui." + srcDirectory.getName() + ".tpls\", [");
+				for (String module : modules) {
+					writer.write("\"" + templateNamePrefix + module + "\",\n");
+				}
+				writer.write("]);\n");
+			}
 			writer.close();
 			log.info("Finish writing file " + finalFile.getAbsolutePath());
 		} catch (IOException e) {
