@@ -94,6 +94,11 @@ public class HtmlTemplateMojo extends AbstractMojo {
 	
 	
 	
+	/**
+	 * Whether to process the text
+	 */
+	@Parameter
+	boolean process=true;
 	
 
 	public void execute() throws MojoExecutionException {
@@ -173,10 +178,20 @@ public class HtmlTemplateMojo extends AbstractMojo {
 		
 		List<String> lines = IOUtils.readLines(new FileReader(new File(base, fileName)));
 		StringBuilder sb = new StringBuilder();
-		sb.append("\"\"");
+		if (process) {
+			sb.append("\"\"");
+		}
+		
 		for (String line : lines) {
-			String newline = "+\"" + line.replace("\"", "\\\"") + "\"\n";
-			sb.append(newline);
+			if (process)
+			{
+				String newline = "+\"" + line.replace("\"", "\\\"") + "\"\n";
+				sb.append(newline);
+			} else {
+				sb.append(line);
+				sb.append("\n");
+			}
+		
 		}
 
 		String r1 = template.replace("@@@@name@@@@", name);
