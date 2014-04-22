@@ -16,6 +16,15 @@ package com.flexdms.htmltemplate;
  * limitations under the License.
  */
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
@@ -26,19 +35,8 @@ import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.codehaus.plexus.util.Scanner;
 import org.sonatype.plexus.build.incremental.BuildContext;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
-import java.util.ArrayList;
-import java.util.List;
 
 //https://wiki.eclipse.org/M2E_compatible_maven_plugins
 /**
@@ -129,6 +127,7 @@ public class HtmlTemplateMojo extends AbstractMojo {
 				log.info("no file is changed. Do not renerate template file");
 				return;
 			}
+			java.util.Arrays.sort(files);
 			Writer writer = new OutputStreamWriter( buildContext.newFileOutputStream(finalFile));
 			List<String> modules = new ArrayList<String>(20);
 

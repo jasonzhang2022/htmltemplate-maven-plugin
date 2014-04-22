@@ -53,6 +53,7 @@ Three parameters are available.
 #fileHeader: header string in the final file.
 #fileFooter: footer string in the final file
 #generateModule: whether to generate module statement.
+#process: whether to escape html to make it appear as valid json string. Default true. If false, text is copied without ang modification.
 
 ==Example==
 Please run mvn test to see an example.  Test set up is under src/test/resources/unit directory. Final file is writtern to target/final.js or target/final2.js
